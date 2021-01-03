@@ -46,12 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/Mentor").permitAll()
 		.antMatchers("/mentorList").permitAll()
 		.antMatchers("/mentorList/*").permitAll();
-
-		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests().antMatchers("/authenticate")
-				.hasAnyAuthority("U", "A", "S")
-				.antMatchers("/admin/request").hasAuthority("S")
-				.anyRequest().authenticated()
-				.and().addFilter(new JwtAuthorizationFilter(authenticationManager()));
 	}
 
 }
