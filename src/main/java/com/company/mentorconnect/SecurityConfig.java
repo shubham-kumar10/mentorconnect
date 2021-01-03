@@ -39,10 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors();
 		
+		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests()
+		.antMatchers("/authenticate").permitAll()
+		.antMatchers("/signUp*").permitAll()
+		.antMatchers("/skills").permitAll()
+		.antMatchers("/Mentor").permitAll()
+		.antMatchers("/mentorList").permitAll()
+		.antMatchers("/mentorList/*").permitAll();
+
 		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests().antMatchers("/authenticate")
-		.hasAnyAuthority("M", "S")
-		.anyRequest().authenticated()
-		.and().addFilter(new JwtAuthorizationFilter(authenticationManager()));
+				.hasAnyAuthority("U", "A", "S")
+				.antMatchers("/admin/request").hasAuthority("S")
+				.anyRequest().authenticated()
+				.and().addFilter(new JwtAuthorizationFilter(authenticationManager()));
 	}
 
 }
