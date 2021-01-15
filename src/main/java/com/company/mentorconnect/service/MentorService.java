@@ -1,5 +1,6 @@
 package com.company.mentorconnect.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,13 @@ public class MentorService {
 			
 		}
 
+	}
+	
+	public List<Mentor_Skill> getMentors(){
+		return mentor_skillRepository.findAll();
+	}
+	
+	public List<Mentor> getMentorsBySkill(){
+		return mentorRepository.findAll();
 	}
 }

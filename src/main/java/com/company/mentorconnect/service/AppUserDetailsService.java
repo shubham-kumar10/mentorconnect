@@ -1,5 +1,7 @@
 package com.company.mentorconnect.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -85,11 +87,13 @@ public class AppUserDetailsService implements UserDetailsService {
 			mentor.setUser(user);
 		mentorRepository.save(mentor);
 		for(SkillDetails skill : mentorDetails.getSkills()){
-			Skills mentorSkill = skillRepository.findById(skill.getSkill_id()).get();
-			float self_rating = skill.getSelf_rating();
-			int yearsOfExperience = skill.getYearsOfExperience();
-			Mentor_Skill mentor_skill = new Mentor_Skill(mentor,mentorSkill,self_rating,yearsOfExperience);
-			mentor_skillRepository.save(mentor_skill);
+			Optional<Skills> mentorSkill = skillRepository.findById(skill.getSkill_id());
+			if(mentorSkill.isPresent()) {
+				float self_rating = skill.getSelf_rating();
+				int yearsOfExperience = skill.getYearsOfExperience();
+				Mentor_Skill mentor_skill = new Mentor_Skill(mentor,mentorSkill.get(),self_rating,yearsOfExperience);
+				mentor_skillRepository.save(mentor_skill);	
+			}
 		}
 	}
 }

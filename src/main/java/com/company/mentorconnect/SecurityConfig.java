@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.company.mentorconnect.security.JwtAuthorizationFilter;
 import com.company.mentorconnect.service.AppUserDetailsService;
 
 @Configuration
@@ -38,14 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors();
-		
-		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests()
-		.antMatchers("/authenticate").permitAll()
-		.antMatchers("/signUp*").permitAll()
-		.antMatchers("/skills").permitAll()
-		.antMatchers("/Mentor").permitAll()
-		.antMatchers("/mentorList").permitAll()
-		.antMatchers("/mentorList/*").permitAll();
+
+		httpSecurity.csrf().disable().httpBasic().and().authorizeRequests().antMatchers("/authenticate").permitAll()
+				.antMatchers("/signUp*").permitAll().antMatchers("/skills").permitAll().antMatchers("/Mentor")
+				.permitAll().antMatchers("/mentorList").permitAll().antMatchers("/mentorList/*").permitAll();
 	}
 
 }
