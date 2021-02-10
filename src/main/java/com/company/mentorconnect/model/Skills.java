@@ -1,10 +1,15 @@
 package com.company.mentorconnect.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +30,9 @@ public class Skills {
 	@Column(name = "prerequites")
 	private String prerequites;
 
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Mentor> mentors;
+	
 	public int getId() {
 		return id;
 	}
@@ -55,6 +63,14 @@ public class Skills {
 
 	public void setPrerequites(String prerequites) {
 		this.prerequites = prerequites;
+	}
+	
+	public List<Mentor> getMentors() {
+		return mentors;
+	}
+
+	public void setMentors(List<Mentor> mentors) {
+		this.mentors = mentors;
 	}
 
 	@Override

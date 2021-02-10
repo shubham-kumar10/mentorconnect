@@ -9,15 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.mentorconnect.exception.EndDateCoincideException;
-import com.company.mentorconnect.exception.MentorSkillAlreadyExistsException;
 import com.company.mentorconnect.exception.StartDateCoincideException;
 import com.company.mentorconnect.model.Mentor;
-import com.company.mentorconnect.model.Mentor_Skill;
-import com.company.mentorconnect.model.Skills;
 import com.company.mentorconnect.model.Training;
 import com.company.mentorconnect.model.User;
 import com.company.mentorconnect.repository.MentorRepository;
-import com.company.mentorconnect.repository.Mentor_SkillRepository;
 import com.company.mentorconnect.repository.TrainingRepository;
 import com.company.mentorconnect.repository.UserRepository;
 
@@ -31,28 +27,26 @@ public class TrainingService {
 	private UserRepository userRepository;
 	@Autowired
 	private MentorRepository mentorRepository;
-	@Autowired
-	private Mentor_SkillRepository mentorSkillRepository;
 	
-	public void addSkillLogin(Mentor_Skill mentorSkill) throws MentorSkillAlreadyExistsException {
-		String userName = mentorSkill.getMentor().getUser().getUserName();
-		Skills skill = mentorSkill.getSkill();
-		User user = userRepository.findByUserName(userName);
-		Mentor mentor = mentorRepository.findByUser(user);
-		List<Mentor_Skill> mentorExistingSkills = mentorSkillRepository.findAllByMentor(mentor);
-		for(Mentor_Skill mentorExistingSkill:mentorExistingSkills){
-			if(mentorExistingSkill.getSkill().getName().matches(skill.getName())){
-				throw new MentorSkillAlreadyExistsException("This skill exists for this mentor");
-			}
-		}
-		Mentor_Skill newMentorSkill = new Mentor_Skill();
-		newMentorSkill.setMentor(mentor);
-		newMentorSkill.setSelfRating(mentorSkill.getSelfRating());
-		newMentorSkill.setYearsOfExperience(mentorSkill.getYearsOfExperience());
-		newMentorSkill.setSkill(skill);
-		mentorSkillRepository.save(mentorSkill);
-	}
-	
+//	public void addSkillLogin(Mentor_Skill mentorSkill) throws MentorSkillAlreadyExistsException {
+//		String userName = mentorSkill.getMentor().getUser().getUserName();
+//		Skills skill = mentorSkill.getSkill();
+//		User user = userRepository.findByUserName(userName);
+//		Mentor mentor = mentorRepository.findByUser(user);
+//		List<Mentor_Skill> mentorExistingSkills = mentorSkillRepository.findAllByMentor(mentor);
+//		for(Mentor_Skill mentorExistingSkill:mentorExistingSkills){
+//			if(mentorExistingSkill.getSkill().getName().matches(skill.getName())){
+//				throw new MentorSkillAlreadyExistsException("This skill exists for this mentor");
+//			}
+//		}
+//		Mentor_Skill newMentorSkill = new Mentor_Skill();
+//		newMentorSkill.setMentor(mentor);
+//		newMentorSkill.setSelfRating(mentorSkill.getSelfRating());
+//		newMentorSkill.setYearsOfExperience(mentorSkill.getYearsOfExperience());
+//		newMentorSkill.setSkill(skill);
+//		mentorSkillRepository.save(mentorSkill);
+//	}
+//	
 	@Transactional
 	public List<Training> getIncompleteTraining(String userName) {
 		User user = userRepository.findByUserName(userName);

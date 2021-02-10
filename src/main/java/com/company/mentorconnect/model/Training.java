@@ -12,47 +12,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="training")
+@Table(name = "training")
 public class Training {
-	
+
 	@Id
-	
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="mentor_id")
+	@JoinColumn(name = "mentor_id")
 	private Mentor mentor;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="skill_id")
+	@JoinColumn(name = "skill_id")
 	private Skills skill;
-	
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private String status;
-	
-	
-	@Column(name="progress")
+
+	@Column(name = "progress")
 	private int progress;
-	
-	@Column(name="rating")
+
+	@Column(name = "rating")
 	private float rating;
-	
-	
-	@Column(name="start_date")
+
+	@Column(name = "start_date")
 	private Date startDate;
-	
-	
-	@Column(name="end_date")
+
+	@Column(name = "end_date")
 	private Date endDate;
 
 	public int getId() {
@@ -133,5 +125,5 @@ public class Training {
 				+ status + ", progress=" + progress + ", rating=" + rating + ", startDate=" + startDate + ", endDate="
 				+ endDate + "]";
 	}
-	
+
 }

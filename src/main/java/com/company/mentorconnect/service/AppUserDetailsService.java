@@ -1,7 +1,5 @@
 package com.company.mentorconnect.service;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -16,13 +14,8 @@ import org.springframework.stereotype.Service;
 import com.company.mentorconnect.exception.UserAlreadyExistsException;
 import com.company.mentorconnect.model.AppUser;
 import com.company.mentorconnect.model.Mentor;
-import com.company.mentorconnect.model.MentorDTO;
-import com.company.mentorconnect.model.Mentor_Skill;
-import com.company.mentorconnect.model.SkillDetails;
-import com.company.mentorconnect.model.Skills;
 import com.company.mentorconnect.model.User;
 import com.company.mentorconnect.repository.MentorRepository;
-import com.company.mentorconnect.repository.Mentor_SkillRepository;
 import com.company.mentorconnect.repository.SkillRepository;
 import com.company.mentorconnect.repository.UserRepository;
 
@@ -33,9 +26,6 @@ public class AppUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	UserRepository userRepository;
-
-	@Autowired
-	Mentor_SkillRepository mentor_skillRepository;
 	
 	@Autowired
 	MentorRepository mentorRepository;
@@ -80,20 +70,18 @@ public class AppUserDetailsService implements UserDetailsService {
 	}
 	
 	@Transactional
-	public void addMentor(MentorDTO mentorDetails){
-		Mentor mentor = mentorDetails.getMentor();
-		User user = userRepository.findByUserName(mentor.getUser().getUserName());
-		if(user!=null)
-			mentor.setUser(user);
-		mentorRepository.save(mentor);
-		for(SkillDetails skill : mentorDetails.getSkills()){
-			Optional<Skills> mentorSkill = skillRepository.findById(skill.getSkill_id());
-			if(mentorSkill.isPresent()) {
-				float self_rating = skill.getSelf_rating();
-				int yearsOfExperience = skill.getYearsOfExperience();
-				Mentor_Skill mentor_skill = new Mentor_Skill(mentor,mentorSkill.get(),self_rating,yearsOfExperience);
-				mentor_skillRepository.save(mentor_skill);	
-			}
-		}
+	public void addMentor(Mentor mentorDetails){
+		System.out.println(mentorDetails);
+//		User user = userRepository.findByUserName(mentorDetails.getUser().getUserName());
+//		if(user!=null)
+//			mentorDetails.setUser(user);
+//		mentorRepository.save(mentorDetails);
+//		for(SkillDetails skill : mentorDetails.getSkills()){
+//			Optional<Skills> mentorSkill = skillRepository.findById(skill.getSkill_id());
+//			if(mentorSkill.isPresent()) {
+//				float self_rating = skill.getSelf_rating();
+//				int yearsOfExperience = skill.getYearsOfExperience();
+//			}
+//		}
 	}
 }

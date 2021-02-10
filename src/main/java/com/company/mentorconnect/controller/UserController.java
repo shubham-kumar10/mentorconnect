@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.company.mentorconnect.exception.UserAlreadyExistsException;
-import com.company.mentorconnect.model.MentorDTO;
+import com.company.mentorconnect.model.Mentor;
 import com.company.mentorconnect.model.Skills;
 import com.company.mentorconnect.model.User;
 import com.company.mentorconnect.repository.SkillRepository;
@@ -28,7 +28,7 @@ public class UserController {
 	@Autowired
 	SkillRepository skillRepository;
 
-	@PostMapping("/signUp")
+	@PostMapping("/signup")
 	public void signupUser(@RequestBody User newUser) throws UserAlreadyExistsException {
 		LOGGER.info("Start of signupUser");
 		LOGGER.debug("new User is {}", newUser);
@@ -41,8 +41,8 @@ public class UserController {
 		return skillRepository.findAll();
 	}
 	
-	@PostMapping("/Mentor")
-	public void signUpMentor(@RequestBody  MentorDTO mentorDetails) {
+	@PostMapping("/addmentor")
+	public void signUpMentor(@RequestBody  Mentor mentorDetails) {
 		appUserDetailsService.addMentor(mentorDetails);
 	}
 	

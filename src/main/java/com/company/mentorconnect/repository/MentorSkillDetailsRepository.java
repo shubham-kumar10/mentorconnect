@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.company.mentorconnect.model.Mentor;
-import com.company.mentorconnect.model.Mentor_Skill;
+import com.company.mentorconnect.model.MentorSkillDetails;
 import com.company.mentorconnect.model.Skills;
 
-public interface Mentor_SkillRepository extends JpaRepository<Mentor_Skill, Integer> {
-	List<Mentor_Skill> findBySkill(Skills skill);
-	List<Mentor_Skill> findAllByMentor(Mentor mentor);
+public interface MentorSkillDetailsRepository extends JpaRepository<MentorSkillDetails, Integer> {
+	List<MentorSkillDetails> findBySkill(Skills skill);
+	List<MentorSkillDetails> findAllByMentor(Mentor mentor);
 }

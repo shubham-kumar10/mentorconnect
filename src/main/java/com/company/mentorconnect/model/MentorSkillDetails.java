@@ -11,13 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mentor_skills")
-public class Mentor_Skill {
+@Table(name = "mentor_skill_details")
+public class MentorSkillDetails {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int id;
 
 	@ManyToOne(cascade = { CascadeType.ALL })
@@ -27,7 +26,6 @@ public class Mentor_Skill {
 
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "skill_id")
-
 	private Skills skill;
 
 	@Column(name = "self_rating")
@@ -36,7 +34,7 @@ public class Mentor_Skill {
 	@Column(name = "years_of_experience")
 	private int yearsOfExperience;
 
-	public Mentor_Skill(Mentor mentor, Skills skill, float selfRating, int yearsOfExperience) {
+	public MentorSkillDetails(Mentor mentor, Skills skill, float selfRating, int yearsOfExperience) {
 		super();
 		this.mentor = mentor;
 		this.skill = skill;
@@ -44,7 +42,7 @@ public class Mentor_Skill {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public Mentor_Skill() {
+	public MentorSkillDetails() {
 		// TODO Auto-generated constructor stub
 	}
 

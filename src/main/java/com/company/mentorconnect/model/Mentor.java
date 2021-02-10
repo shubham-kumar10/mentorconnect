@@ -1,19 +1,23 @@
 package com.company.mentorconnect.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="mentor")
+@Table(name = "mentor")
 public class Mentor {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -27,14 +31,17 @@ public class Mentor {
 
 	@Column(name = "active")
 	private Boolean active = false;
-	
-	@OneToOne(cascade={CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-	public Mentor(){
-		
+	@ManyToMany(mappedBy = "mentors")
+	private List<Skills> skills;
+
+	public Mentor() {
 	}
+
 	public Mentor(String linkedinUrl, Float yearsOfExperience, Boolean active) {
 		this.linkedinUrl = linkedinUrl;
 		this.yearsOfExperience = yearsOfExperience;
@@ -44,9 +51,11 @@ public class Mentor {
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -78,11 +87,19 @@ public class Mentor {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+	
+	public List<Skills> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skills> skills) {
+		this.skills = skills;
+	}
+
 	@Override
 	public String toString() {
 		return "Mentor [id=" + id + ", linkedinUrl=" + linkedinUrl + ", yearsOfExperience=" + yearsOfExperience
 				+ ", active=" + active + ", user=" + user + "]";
 	}
-	
-	
+
 }

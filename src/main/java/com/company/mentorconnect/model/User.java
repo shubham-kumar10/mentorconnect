@@ -51,11 +51,11 @@ public class User {
 	@Column(name = "reset_password_date")
 	private Date resetPasswordDate;
 
-	public User(){
-		
+	public User() {
+
 	}
-	
- 	public Long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
@@ -231,6 +231,4 @@ public class User {
 				+ resetPassword + ", resetPasswordDate=" + resetPasswordDate + "]";
 	}
 
-	
-	
 }
