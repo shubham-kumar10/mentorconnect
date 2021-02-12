@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.company.mentorconnect.model.Mentor_Skill;
 
+import com.company.mentorconnect.model.Mentor;
 import com.company.mentorconnect.service.MentorService;
 
 
@@ -31,7 +31,7 @@ public class MentorController {
 	}
 	
 	@GetMapping("/mentors")
-	public List<Mentor_Skill> getMentors() {
+	public List<Mentor> getMentors() {
 		return mentorService.getMentors();
 	}
 }

@@ -48,8 +48,8 @@ public class MentorService {
 
 	}
 	
-	public List<Mentor_Skill> getMentors(){
-		return mentor_skillRepository.findAll();
+	public List<Mentor> getMentors(){
+		return mentorRepository.findAll();
 	}
 	
 	public List<Mentor> getMentorsBySkill(){
